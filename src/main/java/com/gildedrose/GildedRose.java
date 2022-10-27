@@ -10,12 +10,12 @@ class GildedRose {
     public String getItem;
     public void decreaseValue(Item item, int value) {
         // No need to go through conditions if value is already 0
-        if(item.quality==0)
+        if(item.quality == 0)
             return;
 
         // Items deteriorate twice as fast past their sellIn date
         if (item.sellIn < 1)
-            item.quality-= value*2;
+            item.quality -= value*2;
         else
             item.quality -= value;
 
@@ -55,11 +55,11 @@ class GildedRose {
                 // Backstage passes increase in quality
                 case Backstage:
                     //Value added to the passes depends on nb of days left in sellIn
-                    if(item.sellIn<1)
-                        item.quality=0;
-                    else if (item.sellIn<=5)
+                    if(item.sellIn < 1)
+                        item.quality = 0;
+                    else if (item.sellIn <= 5)
                         increaseValue(item,3);
-                    else if (item.sellIn<=10)
+                    else if (item.sellIn <= 10)
                         increaseValue(item,2);
                     else
                         increaseValue(item,1);

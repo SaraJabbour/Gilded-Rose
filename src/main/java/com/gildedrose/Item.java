@@ -21,7 +21,7 @@ public class Item {
 
     // Classify item based on name
     public Type createType(String name){
-        name=name.toLowerCase();
+        name = name.toLowerCase();
         if(name.contains("aged brie"))
             return Type.AgedBrie;
         if(name.contains("sulfuras"))
@@ -39,12 +39,12 @@ public class Item {
 
         //Ensuring user can't add a negative or a greater than 50 quality
         if (quality < 0)
-            this.quality=0;
+            this.quality = 0;
         else if (quality > 50)
-            this.quality=50;
+            this.quality = 50;
         else
             this.quality = quality;
-        this.type=createType(name);
+        this.type = createType(name);
     }
 
    @Override
