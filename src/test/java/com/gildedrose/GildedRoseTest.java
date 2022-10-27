@@ -11,7 +11,8 @@ class GildedRoseTest {
             new Item("cONjuRed mellow cake",3,10) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        //Testing values to make sure
+
+        //Testing values
         assertEquals(9, app.items[0].quality);
         assertEquals(1, app.items[0].sellIn);
         assertEquals(Item.Type.Backstage, app.items[0].type);
