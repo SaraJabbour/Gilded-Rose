@@ -9,17 +9,30 @@ class GildedRose {
 
     public String getItem;
     public void decreaseValue(Item item, int value) {
+        // No need to go through conditions if value is already 0
+        if(item.quality==0)
+            return;
+
+        // Items deteriorate twice as fast past their sellIn date
         if (item.sellIn < 1)
-            item.quality-=value*2;
+            item.quality-= value*2;
         else
-            item.quality -=value;
+            item.quality -= value;
+
+        // Quality can never be negative
         if(item.quality < 0)
-            item.quality=0;
+            item.quality = 0;
     }
     public void increaseValue(Item item, int value) {
+        //No need to go through function if quality already 50
+        if(item.quality == 50)
+            return;
+
         item.quality += value;
+
+        // Quality can never be more than 50
         if(item.quality > 50)
-            item.quality=50;
+            item.quality = 50;
     }
 
     public void decreaseSellIn(Item item){
@@ -27,64 +40,16 @@ class GildedRose {
     }
     public void updateQuality() {
         for (Item item: items) {
-            /*if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
-
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
-                }
-            }*/
             // Switch statements are used to deal with multiple cases and are faster than if else ladder statements
-            switch(item.name){
-                case "Aged Brie":
+            switch(item.type){
+                case AgedBrie:
                     increaseValue(item,1);
                     break;
-
-                case "Sulfuras, Hand of Ragnaros":
+                // Sulfuras is an item that isn't sold and doesn't change in quality
+                case Sulfuras:
                     break;
-
-                case "Backstage passes to a TAFKAL80ETC concert":
+                // Backstage passes increase in quality
+                case Backstage:
                     //Value added to the passes depends on nb of days left in sellIn
                     if(item.sellIn<1)
                         item.quality=0;
@@ -95,14 +60,16 @@ class GildedRose {
                     else
                         increaseValue(item,1);
                     break;
-
-                case "Conjured Mana Cake":
+                //Conjured items decrease twice as fast
+                case Conjured:
                     decreaseValue(item,2);
+                    break;
+                // Regular items
                 default:
                     decreaseValue(item,1);
             }
             // Decreasing SellIn for all items except Sulfuras
-            if(!item.name.equals("Sulfuras, Hand of Ragnaros"))
+            if(!item.type.equals(Item.Type.Sulfuras))
                 decreaseSellIn(item);
         }
     }
