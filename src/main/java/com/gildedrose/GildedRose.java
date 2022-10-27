@@ -38,6 +38,7 @@ class GildedRose {
     public void decreaseSellIn(Item item){
         item.sellIn--;
     }
+
     public void updateQuality() {
         for (Item item: items) {
             // Decreasing SellIn for all items except Sulfuras
