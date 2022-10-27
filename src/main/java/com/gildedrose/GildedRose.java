@@ -9,7 +9,7 @@ class GildedRose {
 
     public String getItem;
     public void decreaseValue(Item item, int value) {
-        // No need to go through conditions if value is already 0
+        // No need to go through function if value is already 0
         if(item.quality == 0)
             return;
 
