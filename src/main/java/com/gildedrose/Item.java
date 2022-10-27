@@ -1,53 +1,36 @@
 package com.gildedrose;
 
 public class Item {
-
-    /*Used enums since we have specific types of item that don't change, helpful when using switch cases
-    since for example we might have backstage passes for many concerts and not necessarily the TAFKAL80ETC concert*/
-    enum Type{
-        AgedBrie,
-        Sulfuras,
-        Backstage,
-        Conjured,
-        Regular
-    }
     public String name;
-
     public int sellIn;
-
     public int quality;
 
-    public Type type;
+    public int valueCheck(){
 
-    // Classify item based on name
-    public Type createType(String name){
-        name = name.toLowerCase();
-        if(name.contains("aged brie"))
-            return Type.AgedBrie;
-        if(name.contains("sulfuras"))
-            return Type.Sulfuras;
-        if(name.contains("backstage passes"))
-            return Type.Backstage;
-        if(name.contains("conjured"))
-            return Type.Conjured;
-        return Type.Regular;
+        if(quality<0)
+            return 0;
+        if (quality > 50)
+            return 50;
+        return quality;
     }
-
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
-        this.type = createType(name);
-
-        //Ensuring user can't add a negative or a greater than 50 quality
-        if (quality < 0)
-            this.quality = 0;
-        else if (quality > 50 && !this.type.equals(Type.Sulfuras))
-            this.quality = 50;
-        else
-            this.quality = quality;
-        this.type = createType(name);
+        this.quality = quality;
     }
 
+    public void decreaseSellIn(){
+        this.sellIn--;
+    }
+  public void updateQuality(){
+
+        if(this.sellIn<0)
+            this.quality-=2;
+        else
+            this.quality--;
+
+        this.quality=valueCheck();
+  }
    @Override
    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
