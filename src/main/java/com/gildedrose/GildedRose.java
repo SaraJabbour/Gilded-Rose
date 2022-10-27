@@ -46,6 +46,7 @@ class GildedRose {
 
             // Switch statements are used to deal with multiple cases and are faster than if else ladder statements
             switch(item.type){
+                // Aged Brie quality increases over time
                 case AgedBrie:
                     increaseValue(item,1);
                     break;
