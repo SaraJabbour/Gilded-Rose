@@ -40,6 +40,10 @@ class GildedRose {
     }
     public void updateQuality() {
         for (Item item: items) {
+            // Decreasing SellIn for all items except Sulfuras
+            if(!item.type.equals(Item.Type.Sulfuras))
+                decreaseSellIn(item);
+
             // Switch statements are used to deal with multiple cases and are faster than if else ladder statements
             switch(item.type){
                 case AgedBrie:
@@ -68,9 +72,7 @@ class GildedRose {
                 default:
                     decreaseValue(item,1);
             }
-            // Decreasing SellIn for all items except Sulfuras
-            if(!item.type.equals(Item.Type.Sulfuras))
-                decreaseSellIn(item);
+
         }
     }
 }
