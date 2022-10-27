@@ -36,11 +36,12 @@ public class Item {
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
+        this.type = createType(name);
 
         //Ensuring user can't add a negative or a greater than 50 quality
         if (quality < 0)
             this.quality = 0;
-        else if (quality > 50)
+        else if (quality > 50 && !this.type.equals(Type.Sulfuras))
             this.quality = 50;
         else
             this.quality = quality;
