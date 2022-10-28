@@ -3,7 +3,7 @@ package com.gildedrose;
 public class Regular extends Item{
     public Regular(String name, int sellIn, int quality) {
         super(name, sellIn, quality);
-        this.quality=limitRange();
+        this.quality = limitRange();
     }
 
     @Override
@@ -16,7 +16,7 @@ public class Regular extends Item{
     @Override
     public void updateQ() {
         updateSellIn();
-        this.quality-=getRate();
-        this.quality=limitRange();
+        this.quality -= getRate();
+        this.quality = limitRange();
     }
 }

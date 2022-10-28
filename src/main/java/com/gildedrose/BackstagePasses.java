@@ -20,7 +20,7 @@ public class BackstagePasses extends Item{
     @Override
     public void updateQ() {
         updateSellIn();
-        this.quality+=getRate();
-        this.quality=limitRange();
+        this.quality += getRate();
+        this.quality = limitRange();
     }
 }
