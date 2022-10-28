@@ -1,7 +1,7 @@
 package com.gildedrose;
 
-public class Conjured extends Item{
-    public Conjured(String name, int sellIn, int quality) {
+public class Regular extends Item{
+    public Regular(String name, int sellIn, int quality) {
         super(name, sellIn, quality);
         this.quality=limitRange();
     }
@@ -9,10 +9,10 @@ public class Conjured extends Item{
     @Override
     public void updateQ() {
         updateSellIn();
-        if (hasItemExpired())
-            this.quality-=4;
-        else
+        if(hasItemExpired())
             this.quality-=2;
+        else
+            this.quality--;
         this.quality=limitRange();
     }
 }

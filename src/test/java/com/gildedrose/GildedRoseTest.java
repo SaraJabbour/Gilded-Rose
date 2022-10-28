@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GildedRoseTest {
     @Test
     void foo() {
-        Item[] items = new Item[] { new Item("backsTage Passes to F1 paddock", 1, 9),
-            new Item("cONjuRed mellow cake",3,10), new Item("Aged brie",5,48),
-            new Item("Moonpie",2,5), new Item("Sulfuras, Hand of Thanos",-3,80) };
+        Item[] items = new Item[] { new BackstagePasses("backstage Passes to F1 paddock", 1, 9),
+            new Conjured("conjured mellow cake",3,10), new AgedBrie("Aged brie",5,48),
+            new Regular("Moonpie",2,5), new Sulfuras("Sulfuras, Hand of Thanos",-3) };
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();

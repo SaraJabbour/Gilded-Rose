@@ -1,36 +1,32 @@
 package com.gildedrose;
 
-public class Item {
+abstract public class Item {
     public String name;
     public int sellIn;
     public int quality;
 
-    public int valueCheck(){
+    // Ranges of quality
+    private static final int MAX=50;
+    private static final int MIN=0;
 
-        if(quality<0)
-            return 0;
-        if (quality > 50)
-            return 50;
-        return quality;
+    public int limitRange() {
+        return (this.quality > MAX) ? MAX : (this.quality < MIN ? MIN: this.quality);
     }
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
     }
+    // Used an abstract method since all items (except sulfuras) will require an sellIn and quality update
+    public abstract void updateQ();
 
-    public void decreaseSellIn(){
+    // Common method for all subclasses as it's method doesn't change
+    public void updateSellIn(){
         this.sellIn--;
     }
-  public void updateQuality(){
-
-        if(this.sellIn<0)
-            this.quality-=2;
-        else
-            this.quality--;
-
-        this.quality=valueCheck();
-  }
+    public Boolean hasItemExpired(){
+        return this.sellIn < 1;
+    }
    @Override
    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
