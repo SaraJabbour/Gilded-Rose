@@ -9,6 +9,7 @@ abstract public class Item {
     private static final int MAX=50;
     private static final int MIN=0;
 
+    //Ensures quality values are within 0 and 50 inclusive
     public int limitRange() {
         return (this.quality > MAX) ? MAX : (Math.max(this.quality, MIN));
     }

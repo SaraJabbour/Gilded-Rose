@@ -8,7 +8,7 @@ public class BackstagePasses extends Item{
 
     @Override
     public int getRate(){
-        /*primary operation in class is addition, returning opposite gives a 0 value*/
+        //primary operation in class is addition, returning opposite gives a 0 value
         if(hasItemExpired())
             return -(this.quality);
         if(this.sellIn <= 5)
