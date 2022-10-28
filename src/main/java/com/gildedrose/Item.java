@@ -10,7 +10,7 @@ abstract public class Item {
     private static final int MIN=0;
 
     public int limitRange() {
-        return (this.quality > MAX) ? MAX : (this.quality < MIN ? MIN: this.quality);
+        return (this.quality > MAX) ? MAX : (Math.max(this.quality, MIN));
     }
     public Item(String name, int sellIn, int quality) {
         this.name = name;
@@ -18,9 +18,12 @@ abstract public class Item {
         this.quality = quality;
     }
     // Used an abstract method since all items (except sulfuras) will require an sellIn and quality update
+    // updateQ unique for each function as operations to quality differ
     public abstract void updateQ();
+    // Rates define the value by which quality increases/decreases
+    public abstract int getRate();
 
-    // Common method for all subclasses as it's method doesn't change
+    // Common method for all subclasses as its method doesn't change
     public void updateSellIn(){
         this.sellIn--;
     }

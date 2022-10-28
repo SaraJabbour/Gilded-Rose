@@ -7,12 +7,16 @@ public class Regular extends Item{
     }
 
     @Override
+    public int getRate() {
+        if(hasItemExpired())
+            return 2;
+        return 1;
+    }
+
+    @Override
     public void updateQ() {
         updateSellIn();
-        if(hasItemExpired())
-            this.quality-=2;
-        else
-            this.quality--;
+        this.quality-=getRate();
         this.quality=limitRange();
     }
 }

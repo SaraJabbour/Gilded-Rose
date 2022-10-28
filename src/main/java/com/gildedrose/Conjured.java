@@ -7,12 +7,16 @@ public class Conjured extends Item{
     }
 
     @Override
+    public int getRate() {
+        if(hasItemExpired())
+            return 4;
+        return 2;
+    }
+
+    @Override
     public void updateQ() {
         updateSellIn();
-        if (hasItemExpired())
-            this.quality-=4;
-        else
-            this.quality-=2;
+        this.quality-=getRate();
         this.quality=limitRange();
     }
 }
