@@ -5,45 +5,47 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
+    Item[] items = new Item[] { new BackstagePasses("backstage Passes to F1 paddock", 1, 9),
+        new Conjured("conjured mellow cake",3,10), new AgedBrie("Aged brie",5,48),
+        new Regular("Moonpie",2,5), new Sulfuras("Sulfuras, Hand of Thanos",-3) };
+    GildedRose app = new GildedRose(items);
     @Test
     void foo() {
-        Item[] items = new Item[] { new BackstagePasses("backstage Passes to F1 paddock", 1, 9),
-            new Conjured("conjured mellow cake",3,10), new AgedBrie("Aged brie",5,48),
-            new Regular("Moonpie",2,5), new Sulfuras("Sulfuras, Hand of Thanos",-3) };
-        GildedRose app = new GildedRose(items);
-
         app.updateQuality();
 
         //Testing values
-        assertEquals(0, app.items[0].quality);
-        assertEquals(0, app.items[0].sellIn);
 
+        //Backstage
+        qualityTest(0,0);
+        sellInTest(0,0);
 
-        assertEquals(8, app.items[1].quality);
-        assertEquals(2, app.items[1].sellIn);
-
+        //Conjured
+        qualityTest(1,8);
+        sellInTest(1,2);
 
         app.updateQuality();
 
-        assertEquals(0, app.items[0].quality);
-        assertEquals(-1, app.items[0].sellIn);
+        qualityTest(0,0);
+        sellInTest(0,-1);
 
-        assertEquals(6, app.items[1].quality);
-        assertEquals(1, app.items[1].sellIn);
+        qualityTest(1,6);
+        sellInTest(1,1);
 
+        qualityTest(2,50);
+        sellInTest(2,3);
 
-        assertEquals(50, app.items[2].quality);
-        assertEquals(3, app.items[2].sellIn);
+        qualityTest(3,2);
+        sellInTest(3,0);
 
+        qualityTest(4,80);
+        sellInTest(4,-3);
+    }
+    void qualityTest(int index, int quality){
+        assertEquals(quality, app.items[index].quality);
+    }
 
-        assertEquals(2, app.items[3].quality);
-        assertEquals(0, app.items[3].sellIn);
-
-
-        assertEquals(80, app.items[4].quality);
-        assertEquals(-3, app.items[4].sellIn);
-
-
+    void sellInTest(int index, int sellIn){
+        assertEquals(sellIn, app.items[index].sellIn);
     }
 
 }

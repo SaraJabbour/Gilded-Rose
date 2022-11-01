@@ -18,7 +18,7 @@ abstract public class Item {
         this.sellIn = sellIn;
         this.quality = quality;
     }
-    // Used an abstract method since all items (except sulfuras) will require an sellIn and quality update
+    // Used an abstract method since all items (except sulfuras) will require a sellIn and quality update
     // updateQ unique for each function as operations to quality differ
     public abstract void updateQ();
     // Rates define the value by which quality increases/decreases
